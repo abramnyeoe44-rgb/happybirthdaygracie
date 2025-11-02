@@ -1,0 +1,220 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday Gracie 🎈</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">  <style>
+    :root {
+      --bg: #fff5f8;
+      --card: rgba(255, 255, 255, 0.95);
+      --accent: #ff7bb5;
+      --muted: #7b7b7b;
+      --text-color: #222;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Dancing Script', cursive, system-ui;
+      margin: 0;
+      background: linear-gradient(180deg, var(--bg), #fff);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column; /* Stack gallery + card */
+      align-items: center;
+      padding: 10px;
+      color: var(--text-color);
+    }
+
+    /* --- Photo Gallery --- */
+    .photo-gallery {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      z-index: 3;
+    }
+
+    .birthday-photo {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 480px) {
+      .birthday-photo { width: 70px; height: 70px; }
+    }
+
+    /* --- Card Styling --- */
+    .wrap { width: 100%; max-width: 900px; }
+
+    .card {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 18px;
+      padding: 24px 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top:0; right:0; bottom:0; left:0;
+      background: rgba(255,255,255,0.5);
+      z-index: 1;
+      border-radius: 18px;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      margin: 0;
+      font-size: 38px;
+      color: var(--accent);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-top: 4px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .message {
+      margin-top: 18px;
+      background: var(--card);
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 20px;
+      line-height: 1.6;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .actions {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px 18px;
+      border-radius: 10px;
+      border: 0;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.1s;
+    }
+
+    .btn:active { transform: scale(0.98); }
+
+    .btn-pink { background: var(--accent); color: white; }
+    .btn-outline { background: transparent; border: 2px solid var(--accent); color: var(--accent); }
+
+    footer {
+      margin-top: 15px;
+      font-size: 11px;
+      color: #333;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .message p { text-align: left; margin: 0 0 10px; }
+  </style></head>
+<body>  <!-- Top Photo Gallery -->  <div class="photo-gallery">
+    <img src="gracie1.jpg" alt="Gracie 1" class="birthday-photo">
+    <img src="gracie2.jpg" alt="Gracie 2" class="birthday-photo">
+    <img src="gracie3.jpg" alt="Gracie 3" class="birthday-photo">
+  </div>  <!-- Birthday Card -->  <div class="wrap">
+    <div class="card" id="cardRoot">
+      <div class="content">
+        <h1>Happy Birthday, Gracie! 🎉</h1>
+        <div class="subtitle">Cute & cozy — made just for you</div>
+        <div class="message" id="messageBox">
+          <p><strong>Dear Gracie,</strong></p>
+          <p>Happy birthday to my short queen, the dark-humor, smoothie-loving, always-tired bookworm who somehow makes chaos entertaining. You love food, music, and preaching without realizing it, and still manage to keep things real every time.</p>
+          <p>From your lactose-loving habits to your “I’m shy” act (you’re definitely not), you’re one of a kind—and I’m glad you trust me enough to call me your safe space.</p>
+          <p style="margin-top:10px;"><strong>Happy Birthday!</strong></p>
+        </div>
+      </div>
+      <footer></footer>
+    </div>
+  </div>  <!-- Confetti Canvas --><canvas class="confetti" id="confettiCanvas"></canvas>
+
+  <!-- Scripts -->  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>  <script>
+    const cardRoot = document.getElementById('cardRoot');
+
+    // Background image (Base64 or URL)
+    const base64Image = "data:image/png;base64,/9j/..."; // shortened for brevity
+    cardRoot.style.backgroundImage = `url(${base64Image})`;
+
+    // Confetti effect
+    (function(){ 
+      const c = document.getElementById('confettiCanvas'); 
+      const ctx = c.getContext('2d'); 
+      
+      function resize(){ c.width = window.innerWidth; c.height = window.innerHeight; } 
+      window.addEventListener('resize', resize); 
+      resize();
+
+      const pieces = [];
+      const colors = ['#FFD1E8','#FFB3DB','#FFC9EA','#FFF1F8', '#FF7BB5'];
+      for(let i=0;i<80;i++){ 
+        pieces.push({x: Math.random() * c.width, y: Math.random() * -c.height, r: Math.random() * 6 + 4, d: Math.random() * 2 + 1, c: colors[Math.floor(Math.random() * colors.length)], tilt: Math.random() * 10}); 
+      }
+
+      function draw(){
+        ctx.clearRect(0,0,c.width,c.height);
+        for(let p of pieces){
+          ctx.fillStyle = p.c; 
+          ctx.beginPath(); 
+          ctx.fillRect(p.x, p.y, p.r, p.r); 
+          p.y += p.d; 
+          p.x += Math.sin(p.y/20);
+          if(p.y > c.height+20){ p.y=-20; p.x=Math.random()*c.width; }
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+  </script></body>
+</html>
